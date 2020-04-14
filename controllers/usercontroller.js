@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 
 
 router.post('/createuser', function (req, res) {
-    console.log('We are on Express')
     const email = req.body.user.email;
     const pass = req.body.user.password;
     const pollCount = req.body.user.pollCount;
@@ -19,7 +18,6 @@ router.post('/createuser', function (req, res) {
        
     }).then(
         function createSuccess(user) {
-            console.log('Making Token from ')
             const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
             res.status(200).json({
                 user: user,

@@ -19,9 +19,7 @@ router.get('/', (req, res) => {
 
 router.post('/:pollId', (req, res) => {
     let pollId = req.params.pollId
-    console.log(req.body.session)
     let userId = jwt.decode(req.body.session, process.env.JWT_SECRET)
-    console.log(`Checking Prior Voting for ${userId.id} on Poll ID ${req.params.pollId}`)
     Poll.findOne(
         {
             where: {id: pollId},
@@ -34,7 +32,6 @@ router.post('/:pollId', (req, res) => {
                 userId: userId.id
             }
         }).then(result => {
-            console.log([poll.dataValues.id, result])
             res.send([poll, result])
         })
     })
@@ -45,9 +42,7 @@ router.post('/:pollId', (req, res) => {
 
 router.post('/dev/:pollId', (req, res) => {
     let pollId = req.params.pollId
-    console.log(req.body.session)
     let userId = jwt.decode(req.body.session, process.env.JWT_SECRET)
-    console.log(`Checking Prior Voting for ${userId.id} on Poll ID ${req.params.pollId}`)
     Poll.findOne(
         {
             where: {id: pollId},
@@ -67,7 +62,6 @@ router.post('/dev/:pollId', (req, res) => {
 })
 // ROUTE TO POST NEW POLL
 router.post('/new/newPoll', (req, res) => {
-    console.log("The New Poll Request Looks Like", req.body)
     tokenInfo = jwt.decode(req.body.token, process.env.JWT_SECRET)
        
     const pollFromRequest = {
@@ -81,7 +75,6 @@ router.post('/new/newPoll', (req, res) => {
         summary: req.body.summary,
         changedState: true
     }
-    console.log("The New Pool Build-out Looks like", pollFromRequest)
     Poll.create(pollFromRequest)
     .then(poll => {
        res.status(200).json(poll)
@@ -108,7 +101,6 @@ router.get('/status/active', (req,res) => {
 
 // ROUTES FOR CLOSED POLL
 router.get('/status/closed', (req,res) => {
-    let polltime = req.params.open
     Poll.findAll(
         {where: {
             changedState: false
