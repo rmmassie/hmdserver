@@ -7,7 +7,7 @@ module.exports = function(res, req, next) {
     Poll.findAll()
     .then(result => {
         for (i = 0; i < result.length; i++){
-            let offsetDays = 5
+            let offsetDays = 3
             let offset = offsetDays * 24 * 60 * 60 * 1000;
             let timeNow = Date.now()
             let staleTime = timeNow-offset;
