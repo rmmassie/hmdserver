@@ -6,10 +6,10 @@ const user = require('./controllers/usercontroller');
 const poll = require('./controllers/pollcontroller');
 const response = require('./controllers/responsecontroller');
 const admin = require('./controllers/admincontroller');
-//test this
+// var cors = require('cors')
 
 sequelize.sync() //{force:true}
-
+// app.use(cors())
 app.use(express.json())
 app.use(require('./middleware/header'))
 
