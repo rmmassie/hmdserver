@@ -12,6 +12,10 @@
     "url": "git+https://github.com/rmmassie/hmdserver.git"
   },
   "author": "Stephen Lowe, Quinn Edwards, Matt Massie",
+  "engines": {
+    "node": "12.16.0",
+    "npm": "6.13.4"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
