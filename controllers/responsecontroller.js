@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../db');
-const Poll = sequelize.import('../models/poll')
 const Response = sequelize.import('../models/response')
 const jwt = require('jsonwebtoken');
 
@@ -22,8 +21,6 @@ router.get('/get/:pollId', (req, res) => {
 
 //SEND A USER RESPONSE INTO THE DATABASE
 router.post('/:pollID/', (req, res) => {
-    console.log("Poll is ", req.params.pollID)
-    console.log("Vote is Option ", req.body.vote)
     let userId = jwt.decode(req.body.session, process.env.JWT_SECRET)
     try {
         Response.create({

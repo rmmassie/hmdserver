@@ -32,7 +32,6 @@ router.post('/', function (req, res) {
                 userArray.push(user),
                 userArray.push(poll),
                 userArray.push(response)
-                console.log('Fetched Admin Data for User:',userId )
                 res.send(userArray)
             }).catch(err => res.status(500).json ({
                 error: err
