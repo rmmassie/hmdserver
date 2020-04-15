@@ -114,4 +114,31 @@ router.get('/status/closed', (req,res) => {
     })
     )})
 
+    router.get('/delete/:pollID', (req,res) => {
+        console.log(req.params.pollID)
+        Poll.destroy({where: {
+            id: req.params.pollID
+        }}).then(response => {
+            if (response === 1) {
+                console.log("Comment Executed Successfully")
+                res.send(200)
+            } else if (response === 0) {
+                console.log("Delete Unsuccessful")
+                res.send(400)
+
+            }
+            
+            
+        }
+        ).catch(err => {
+            console.log(err)
+            res.status(403)
+        }
+           
+        )
+        
+        
+        
+    })
+
 module.exports = router; 
