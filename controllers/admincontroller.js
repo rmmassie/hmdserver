@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 
 
 router.post('/', function (req, res) {
-    const token = req.body.token;
+    const token = req.headers.authorization;
     let userId = jwt.decode(token, process.env.JWT_SECRET);
     userId = userId.id;
     

@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 router.post('/:pollId', (req, res) => {
     let pollId = req.params.pollId
-    let userId = jwt.decode(req.body.session, process.env.JWT_SECRET)
+    let userId = jwt.decode(req.headers.authorization, process.env.JWT_SECRET)
     Poll.findOne(
         {
             where: {id: pollId},
@@ -42,7 +42,7 @@ router.post('/:pollId', (req, res) => {
 
 router.post('/dev/:pollId', (req, res) => {
     let pollId = req.params.pollId
-    let userId = jwt.decode(req.body.session, process.env.JWT_SECRET)
+    let userId = jwt.decode(req.headers.authorization, process.env.JWT_SECRET)
     Poll.findOne(
         {
             where: {id: pollId},
@@ -62,8 +62,7 @@ router.post('/dev/:pollId', (req, res) => {
 })
 // ROUTE TO POST NEW POLL
 router.post('/new/newPoll', (req, res) => {
-    tokenInfo = jwt.decode(req.body.token, process.env.JWT_SECRET)
-       
+    tokenInfo = jwt.decode(req.headers.authorization, process.env.JWT_SECRET)
     const pollFromRequest = {
         userId: tokenInfo.id,
         //Make this a request from the list of possible polls

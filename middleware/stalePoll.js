@@ -16,7 +16,6 @@ module.exports = function(res, req, next) {
             let created = result[i].dataValues.createdAt;
             
             if (created < staleDate && result[i].dataValues.changedState === true){
-                console.log("this one is old");
                 Poll.findOne({
                     where:{
                         id: pollId
