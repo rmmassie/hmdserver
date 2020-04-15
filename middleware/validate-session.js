@@ -1,11 +1,12 @@
-//require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const sequelize = require('../db');
 const User = sequelize.import('../models/user');
 
 module.exports = function(req, res, next) {
-    const sessionToken = req.headers.authorization;
-        console.log(sessionToken)
+    if (req.method == "OPTIONS") {
+        next()
+    } else {
+        const sessionToken = req.headers.authorization;
         if (!sessionToken) return res.status(403).send({ auth: false, message: "No token provided."});
         else{
             jwt.verify(sessionToken, process.env.JWT_SECRET, (err,decoded) => {
@@ -22,4 +23,4 @@ module.exports = function(req, res, next) {
             });
         }
     }
-
+}
