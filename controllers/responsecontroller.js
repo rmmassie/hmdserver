@@ -21,7 +21,7 @@ router.get('/get/:pollId', (req, res) => {
 
 //SEND A USER RESPONSE INTO THE DATABASE
 router.post('/:pollID/', (req, res) => {
-    console.log(req)
+    
     let userId = jwt.decode(req.headers.authorization, process.env.JWT_SECRET)
     try {
         Response.create({

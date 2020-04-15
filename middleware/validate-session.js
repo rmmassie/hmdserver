@@ -6,7 +6,7 @@ module.exports = function(req, res, next) {
     if (req.method == "OPTIONS") {
         next()
     } else {
-        console.log('Passing Through Validate Session')
+        
         const sessionToken = req.headers.authorization;
         if (!sessionToken) return res.status(403).send({ auth: false, message: "No token provided."});
         else{
